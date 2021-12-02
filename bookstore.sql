@@ -19,14 +19,16 @@ create table books (
     title varchar(100), 
     description varchar(100), 
     place_sell varchar(3), 
-    stock int default 0, 
-    creation_date datetime  default  current_timestamp  on update current_timestamp 
+    stock int default(0), 
+    creation_date timestamp default current_timestamp on update current_timestamp 
 );
 
 -- Update Column from Table --
 alter table books 
-    add price int default 0,
-    add status enum('available','out of stock','limited'),
+    add (price int default(0),
+    add status enum('available','out of stock','limited'));
+
+alter table books 
     drop column place_sell;
 
 -- Insert Data on Table --
@@ -60,8 +62,7 @@ select * from books order by id asc;
 select * from books limit 2;
 
 --- Update author1 and price ---
-update books set author1 = 'cicink', price = 55500
-where id = 1;
+update books set author1 = 'cicink', price = 55500 where id = 1;
 
 --- Delete Row from ID ---
 delete from books where id = 3;
